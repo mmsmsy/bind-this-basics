@@ -143,7 +143,7 @@ function createRobot(type, strength) {
 createRobot.call(bert, "cyborg", "banana"); // You've created a cyborg named Bert , which is as strong as a banana
 createRobot.call(ernie, "terminator", "tree"); // You've created a terminator named Ernie , which is as strong as a tree
 ```
-In the example above I've created a new function createRobot which takes two arguments: type and strength. First it adds this.type and this.strength to the specified object and assigns the strength argument to it, and then it logs the message with the specified objects name and strength. With apply it would look like this:
+In the example above I've created a new function createRobot which takes two arguments: type and strength. First it adds this.type and this.strength to the specified object and assigns each argument to both of these, then it logs the message with the specified objects name and strength. With apply it would look like this:
 ```
 createRobot.apply(bert, ["cyborg", "banana"]);
 createRobot.apply(ernie, ["terminator", "tree"]);
