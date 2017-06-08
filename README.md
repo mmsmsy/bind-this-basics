@@ -1,7 +1,7 @@
 # bind-this-basics
 Getting to know it better, by writing about it with examples.
 
-#### I've known "this" and "bind" along with "call/apply" for quite some time now and I thought I understand the concept properly since I've been creating projects from scratch that depended on these being used. Then I was asked to explain it along with context (or function scope) in JavaScript and I couldn't even do that intelligibly. So here I am, re-learning the basics and trying to get the most of it by writing about every little step to remember and understand it better.
+#### I've known "this" and "bind" along with "call/apply" for quite some time now and I thought I understood the concept properly since I've been creating projects from scratch that depended on these being used. Then I was asked to explain it along with context (or function scope) in JavaScript and I couldn't even do that intelligibly. So here I am, re-learning the basics and trying to get the most of it by writing about every little step to remember and understand it better.
 
 Let's start with the definition. "this" keyword is used to point to the current context, i.e where the "this" is in the code, so that f.e. we can reuse this code within different context to get different results. By context I mean the place where the function has been invoked, i.e in which object instance. A simple example would be creating a function that introduces specific person:
 ```
