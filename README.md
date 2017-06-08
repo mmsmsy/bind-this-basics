@@ -41,7 +41,7 @@ console.log(ernie.name, ernie.doubleName);  // Ernie, undefined
 
 sayHello(); // Hello, I'm Matt
 ```
-The Person constructor function that I added already uses the "this" keyword. Thanks to "this" the names that we pass as a parameter with ```new Person()``` are stored as keys inside an object and are available for each individual instance of this constructor. The typical declaration with "var" is treated as a private value and can be only accessed by methods defined in the constructor. You can see that because the normal singular name is logged, but the doubleName is undefined. Now, the sayHello function still outputs Matt as it's always referring to name in the global scope. I'll edit that now, so that it uses name key based on where the function has been invoked in.
+The Person constructor function that I added already uses the "this" keyword. Thanks to "this" the name that I pass as an argument with ```new Person()``` are stored as keys inside an object and are available for each individual instance of this constructor. The typical declaration with "var" is treated as a private value and can be only accessed by methods defined in the constructor. You can see that because the normal singular name is logged, but the doubleName is undefined. Now, the sayHello function still outputs Matt as it's always referring to name in the global scope. I'll edit that now, so that it uses name key based on where the function has been invoked in.
 ```
 function sayHello() {
   var output = "Hello, I'm " + this.name;
