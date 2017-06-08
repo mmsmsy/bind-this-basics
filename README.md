@@ -120,7 +120,7 @@ newObjectScope.bertGreet(); // Hello, I'm Bert
 ```
 First, I declared a new variable and since we can assign functions to variables, which essentially makes them a function I assigned sayHello function to it with a little twist. Thanks to the bind function with bert as previously created object it will be bound to, bertHello will always use "this" keyword inside the bert object. Since bert's name is Bert it will log ```Hello, I'm Bert``` even though it's been invoked inside newObjectScope object scope. Thanks to this I can create specific functions built on top of generic ones.
 
-Now, the call/apply functions change the target function's context and invoke it immidiately. From what I understand it can't be assigned to a variable as it was already invoked and then if we try to invoke it with the variable's name and it outputs an error ```Uncaught TypeError: newThing is not a function``` . Therefore it can't be used as a more specific function multiple times at a specific time in execution order since it's not a permanent modification to the target function. But we can still achieve the same effect just once like so:
+Now, the call/apply functions change the target function's context and invoke it immidiately. From what I understand it can't be assigned to a variable as it is immidiately invoked and then if we try to invoke it with the variable's name it outputs an error ```Uncaught TypeError: newThing is not a function``` . Therefore it can't be used as a more specific function multiple times at a specific time in execution order since it's not a permanent modification to the target function. But we can still achieve the same effect just once like so:
 ```
 sayHello.call(bert); // Hello, I'm Bert
 sayHello.apply(ernie); // Hello, I'm Ernie
@@ -143,7 +143,7 @@ function createRobot(type, strength) {
 createRobot.call(bert, "cyborg", "banana"); // You've created a cyborg named Bert , which is as strong as a banana
 createRobot.call(ernie, "terminator", "tree"); // You've created a terminator named Ernie , which is as strong as a tree
 ```
-In the example above I've created a new function createRobot which takes two arguments: name and strength. First it adds a this.strength to the specified object and assigns the strength argument to it, and then it logs the message with the specified objects name and strength. With apply it would look like this:
+In the example above I've created a new function createRobot which takes two arguments: type and strength. First it adds this.type and this.strength to the specified object and assigns the strength argument to it, and then it logs the message with the specified objects name and strength. With apply it would look like this:
 ```
 createRobot.apply(bert, ["cyborg", "banana"]);
 createRobot.apply(ernie, ["terminator", "tree"]);
