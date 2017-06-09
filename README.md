@@ -170,3 +170,57 @@ createFlimsyBertRobot();
 createStrongErnieRobot();
 ```
 Going back then, the only difference between those that I can see is that bind is permanent and can be assigned to new variables as a more specific function and call/apply invoke the function immidiately changing the context just this once, when they are invoked.
+
+#### Arrow functions and bind
+Now, I've heard over and over about arrow function's "this" keyword behavior. I never really bothered looking more into it since I was mostly excited about the short syntax for single purpose functions without any boilerplate. Now, that was a mistake, because it has a massive impact on, as mentioned, the "this" keyword behavior and bind/call/apply as a consequence, which can come in handy. Here's a slightly more diverse example:
+```
+"use strict";
+
+var name = "Matt";
+
+function sayHello() {
+  var output = "Hello, I'm " + this.name;
+  console.log(output);
+}
+
+function Person(personsName) {
+ this.name = personsName;
+
+ this.boundGreet = passedValue => console.log("Hello, I'm " + this.name + passedValue);
+
+ this.notBoundGreet = function(passedValue) {
+   console.log("Hello, I'm " + this.name + passedValue);
+ }
+}
+
+var bert = new Person("Bert");
+
+var bertBoundGreet = bert.boundGreet;
+var bertNotBoundGreet = bert.notBoundGreet;
+
+var newObjectScope = {
+  name: "Thomas",
+  greet: sayHello,
+  greet1bound: bert.boundGreet,
+  greet2notBound: bert.notBoundGreet,
+  greet3bound: bertBoundGreet,
+  greet4notBound: bertNotBoundGreet
+}
+
+newObjectScope.greet(); // Hello, I'm Thomas
+newObjectScope.greet1bound(" ! "); // Hello, I'm Bert !
+newObjectScope.greet2notBound(" ! "); // Hello, I'm Thomas ! 
+newObjectScope.greet3bound(" ! "); // Hello, I'm Bert ! 
+newObjectScope.greet4notBound(" ! "); // Hello, I'm Thomas ! 
+```
+I focused on methods available in the Person constructor, since it's in there where declaring arrow functions has it's effect for future instances of it. The boundGreet is created with arrow function syntax, the notBoundGreet is done the usual ES5 syntax way. Arrow functions will always treat "this" as if it is in it's original place, i.e. the instance. Therefore if we try to pass different variations of these functions as methods in a different object scope, f.e. previously created newObjectScope with name "Thomas", the regular sayHello function would return "Thomas", the notBoundGreet in ES5 syntax would return "Thomas" as well since it was invoked in this context and the boundGreet returned "Bert" even though it was invoked in that new scope. Since the "this" was not affected for arrow functions at all even in different context I'm curious what effect it has on bind/call/apply. Let's use call as an example.
+```
+var ernie = new Person("Ernie");
+
+newObjectScope.greet.call(ernie); // Hello, I'm Ernie
+newObjectScope.greet1bound.call(ernie, " !! "); // Hello, I'm Bert !! 
+newObjectScope.greet2notBound.call(ernie, " !! "); // Hello, I'm Ernie !! 
+newObjectScope.greet3bound.call(ernie, " !! "); // Hello, I'm Bert !! 
+newObjectScope.greet4notBound.call(ernie, " !! "); // Hello, I'm Ernie !! 
+```
+As I can see, thanks to arrow functions there's no need to ever bind a function in ES6 if there isn't any purpose for it. Even though we used call on all of those methods, only the standard ES5 functions' "this" was affected. For the bound arrow functions bert object was always the context.
