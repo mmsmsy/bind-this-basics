@@ -223,4 +223,4 @@ newObjectScope.greet2notBound.call(ernie, " !! "); // Hello, I'm Ernie !!
 newObjectScope.greet3bound.call(ernie, " !! "); // Hello, I'm Bert !! 
 newObjectScope.greet4notBound.call(ernie, " !! "); // Hello, I'm Ernie !! 
 ```
-As I can see, thanks to arrow functions there's no need to ever bind a function in ES6 if there isn't any purpose for it. Even though we used call on all of those methods, only the standard ES5 functions' "this" was affected. For the bound arrow functions bert object was always the context.
+As I can see, thanks to arrow functions there's no need to ever bind a function in ES6 if there isn't any purpose for it. Even though we used call on all of those methods, only the standard ES5 functions' "this" was affected. For the bound arrow functions bert object was always the context. Thanks to knowing this I won't have to worry about binding setInterval to the object for it to not be invoked in the window object.
