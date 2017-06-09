@@ -171,7 +171,7 @@ createStrongErnieRobot();
 ```
 Going back then, the only difference between those that I can see is that bind is permanent and can be assigned to new variables as a more specific function and call/apply invoke the function immidiately changing the context just this once, when they are invoked.
 
-### Arrow functions and bind
+## Arrow functions and bind
 Now, I've heard over and over about arrow function's "this" keyword behavior. I never really bothered looking more into it since I was mostly excited about the short syntax for single purpose functions without any boilerplate. Now, that was a mistake, because it has a massive impact on, as mentioned, the "this" keyword behavior and bind/call/apply as a consequence, which can come in handy. Here's a slightly more diverse example:
 ```
 "use strict";
